@@ -1,1 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мебель на заказ</title>
+    <style>
+        /* Общие настройки */
+        html { scroll-behavior: smooth; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        body { background: #222; display: flex; justify-content: center; }
+        .mobile-container { width: 100%; max-width: 480px; background: #3a4a66; min-height: 100vh; color: #fff; padding-bottom: 50px; }
+        
+        /* Секции */
+        header, section { padding: 30px 20px; text-align: center; }
+        h1 { margin-bottom: 10px; }
+        
+        /* Кнопка */
+        .btn-primary { width: 100%; padding: 15px; background: #8ba2d6; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: #000; }
+        
+        /* Скролл карточек (отзывы) */
+        .reviews-wrapper { display: flex; overflow-x: auto; gap: 15px; padding: 10px 0; scroll-snap-type: x mandatory; }
+        .reviews-wrapper::-webkit-scrollbar { display: none; }
+        .review-card { flex: 0 0 75%; background: #253045; padding: 20px; border-radius: 12px; scroll-snap-align: start; text-align: left; }
+        
+        /* Форма */
+        .add-review { background: #253045; margin: 20px; padding: 20px; border-radius: 12px; }
+        input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 6px; border: none; }
+        
+        /* Футер */
+        footer { padding: 20px; text-align: center; background: #253045; }
+    </style>
+</head>
+<body>
 
+<div class="mobile-container">
+    <header>
+        <h1>Мебель на заказ</h1>
+        <p>Качество в каждой детали</p>
+        <br>
+        <a href="#contacts" style="text-decoration: none;"><button class="btn-primary">Заказать проект</button></a>
+    </header>
+
+    <section>
+        <h2>Отзывы</h2>
+        <div class="reviews-wrapper" id="reviewsWrapper">
+            <div class="review-card"><h4>Сабина</h4><p>Отличная мебель, очень довольна!</p></div>
+            <div class="review-card"><h4>Урмат</h4><p>Сделали в срок, рекомендую.</p></div>
+        </div>
+    </section>
+
+    <section class="add-review">
+        <h3>Оставить отзыв</h3>
+        <form id="reviewForm">
+            <input type="text" id="userName" placeholder="Ваше имя" required>
+            <textarea id="userText" placeholder="Ваш комментарий" required></textarea>
+            <button type="submit" class="btn-primary">Отправить</button>
+        </form>
+    </section>
+
+    <footer id="contacts">
+        <h2>Контакты</h2>
+        <p>📍 г. Бишкек, ул. Ибраимова 100</p>
+        <p>📞 +996 555 000 000</p>
+    </footer>
+</div>
+
+<script>
+    // Логика добавления отзыва
+    document.getElementById('reviewForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('userName').value;
+        const text = document.getElementById('userText').value;
+        
+        const newCard = document.createElement('div');
+        newCard.className = 'review-card';
+        newCard.innerHTML = `<h4>${name}</h4><p>${text}</p>`;
+        
+        document.getElementById('reviewsWrapper').prepend(newCard);
+        document.getElementById('reviewForm').reset();
+    });
+</script>
+</body>
+</html>
